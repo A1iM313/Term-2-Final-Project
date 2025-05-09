@@ -1,66 +1,71 @@
-import { React, useState } from "react";
+import { React, useState, onSelect } from "react";
 import { Button, Container } from "react-bootstrap";
 import {
   Dropdown,
-  DropdownItem,
   DropdownMenu,
-  DropdownToggle,
 } from "react-bootstrap";
 
 // This is the dropdown that the user interacts with in order to select their visualization.
 const DataDropdown = ({ onSelect }) => {
   const [dropdownValue, setDropdownValue] = useState("");
 
+// This const handles the dropdownvalue and changes it later on according to user input. event.target.value is whats changed, although it might be better to have it be dropdown value
   const handleDropdownChange = (event) => {
     setDropdownValue(event.target.value);
   };
 
-  const handleVisualize = () => {
-    if (dropdownValue) {
-      onSelect(dropdownValue);
-    }
-  };
-return(
+  return (
     <>
-    <handleDropdownChange />
-    <dropdownValue />
+      <handleDropdownChange />
+      <dropdownValue />
     </>
-)
+  );
+};
+const handleVisualize = ({ dropdownValue }) => {
+  if (dropdownValue) {
+    onSelect(dropdownValue);
+  }
 };
 
-const UserDropdown = ({ onDropdownChange, handleDropdownChange, dropdownValue }, handleVisualize) => {
-    return (
-      <>
-        <Dropdown value={dropdownValue} onChange={handleDropdownChange}>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            {dropdownValue || "Select Visualization"}
-          </Dropdown.Toggle>
-          <DropdownMenu>
-            <Dropdown.Item
-              onClick={() => onDropdownChange("Histogram")}
-              href="#/action-1"
-            >
-              Histogram
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => onDropdownChange("Bar Graph")}
-              href="#/action-2"
-            >
-              Bar Graph
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => onDropdownChange("Heatmap")}
-              href="#/action-3"
-            >
-              Heatmap
-            </Dropdown.Item>
-          </DropdownMenu>
-        </Dropdown>
-        <handleVisualize />
-      </>
-    );
-  };
+// This is the dropdown menu that allows the user to choose their selection and changes the value of dropdownvalue accordingly, using handledropdownchange
+const UserDropdown = ({
+  handleDropdownChange,
+  dropdownValue,
+  handleVisualize,
+}) => {
+  return (
+    <>
+      <Dropdown onSelect={handleDropdownChange}>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          {dropdownValue || "Select Visualization"}
+        </Dropdown.Toggle>
+        <DropdownMenu>
+          <Dropdown.Item
+            onClick={() => handleDropdownChange("Histogram")}
+            href="#/action-1"
+          >
+            Histogram
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => handleDropdownChange("Bar Graph")}
+            href="#/action-2"
+          >
+            Bar Graph
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => handleDropdownChange("Heatmap")}
+            href="#/action-3"
+          >
+            Heatmap
+          </Dropdown.Item>
+        </DropdownMenu>
+      </Dropdown>
+      <handleVisualize />
+    </>
+  );
+};
 
+//This is the button that initializes the visualization change
 const SelectButton = ({ handleVisualize }) => {
   return (
     <Button onClick={handleVisualize} variant="primary">

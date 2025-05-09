@@ -1,4 +1,38 @@
-import React, { Component, useState } from 'react'
-import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
+import React from "react";
+import Plot from "react-plotly.js";
 
+const HeatMap = () => {
+
+  return (
+    <Plot
+      data={[
+        {
+          x: ['1h', '2h', '3h', '4h','5h', '6h', '7h', '8h','9h', '10h', '11h', '12h','13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h','21h', '22h', '23h', '24h'],
+          y: ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"],
+          z: [
+            [5, 30, 12, 30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50, 60, 1, 60, 15, 20, ],
+            [5, 30, 12, 30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50],
+            [30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50, 1, 60, 15, 20, ],
+            [5, 30, 12, 30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50],
+            [5, 40, 32, 70, 60, 20, 51, 60, 45, 90, 80, 20, 70, 10, 15, 40, 100, 30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50],
+            [30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50],
+            [5, 40, 32, 70, 60, 20, 51, 60, 45, 90, 80, 20, 70, 10, 15, 40, 100, 30, 60, 120, 1, 60, 15, 20, 50, 20, 100, 60, 65, 20, 50]
+          ],
+          type: "heatmap",
+          colorscale: "null",
+          showscale: true,
+        },
+      ]}
+      layout={{
+        width: 700,
+        height: 350,
+        title: "Basic Heatmap",
+      }}
+      config={{
+        displayModeBar: false,
+      }}
+    />
+  );
+};
+
+export default HeatMap;
