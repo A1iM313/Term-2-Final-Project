@@ -16,7 +16,7 @@ const VisualizationMenu = () => {
   const [selectedVis, setSelectedVis] = useState("null");
 
   return (
-    <div>
+    <div style={{ paddingTop: "30px" }}>
       <h1>Hello</h1>
       <h4>Explanation goes here</h4>
       <Dropdown>

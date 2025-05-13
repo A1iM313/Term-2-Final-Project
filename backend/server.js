@@ -19,3 +19,18 @@ requestHandler.listen(port, () => {
     console.log(`Server up and listening on port ${port}`)
 })
 
+//-----------------
+
+app.get("/api/v1/VisualizationMenu", async (req, res) => {
+    try{
+        const dbResponse = await db.query(`
+            SELECT weather_main,
+            AVG(traffic_volume) as traffic_volume
+            
+            `)
+    } catch{}
+})
+
+app.get("/api/v1/VisualizationMenu", async (req, res) => {
+    {tr}
+})

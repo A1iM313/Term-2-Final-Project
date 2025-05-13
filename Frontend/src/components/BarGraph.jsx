@@ -27,7 +27,7 @@ export default function BarGraph() {
         labels: labels,
         datasets: [{
         label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40, 33, 27],
+        data: [5041, 4489, 264, 1667, 6082, 2982, 4210, 3300, 827],
         fill: false,
         borderColor: 'rgb(69, 190, 190)',
         tension: 0.1
