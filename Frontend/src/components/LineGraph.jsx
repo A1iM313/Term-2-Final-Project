@@ -26,13 +26,13 @@ import {
 
 
 export default function LineGraph() {
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
     const options = {};
     const data = {
           labels: labels,
           datasets: [{
           label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          data: [65, 59, 80, 81, 56, 55, 47, 63, 66],
           fill: false,
           borderColor: 'rgb(69, 190, 190)',
           tension: 0.1
