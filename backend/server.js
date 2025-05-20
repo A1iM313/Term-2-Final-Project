@@ -19,7 +19,7 @@ requestHandler.listen(port, () => {
 
 //-----------------Bar Chart
 
-requestHandler.get("/api/v1/VisualizationMenu", async (req, res) => {
+requestHandler.get("/api/v1/BarChart", async (req, res) => {
   try {
     const dbResponse = await db.query(`
             SELECT weather_main,
@@ -35,7 +35,7 @@ requestHandler.get("/api/v1/VisualizationMenu", async (req, res) => {
 
     res.json(result);
   } catch (error) {
-    console.error("Error calculating site averages:", error);
+    console.error("Error Displaying Data:", error);
     res.status(500).json({ error: "Server error" });
   }
 
@@ -48,20 +48,28 @@ requestHandler.get("/api/v1/VisualizationMenu", async (req, res) => {
 
 //-----------------Line Chart
 
-requestHandler.get("/api/v1/VisualizationMenu", async (req, res) => {
+requestHandler.get("/api/v1/LineChart", async (req, res) => {
   try {
     const dbResponse = await db.query(`
         SELECT 
-        date_time,
-        traffic_volume
-        FROM air_quality
+        EXTRACT(YEAR FROM date_time) AS year,
+        AVG(traffic_volume) AS avg_traffic_volume
+        FROM traffic_volume
         WHERE date_time IS NOT NULL
-        ORDER BY date_time
-        EXTRACT(YEAR FROM date_time) AS year
+        GROUP BY year
+        ORDER BY year;
         `);
 
-    const formattedDate = new Date(Date).toISOString().split("T")[0];
+
     
-    const result = Object.keys()
-  } catch {}
+    const result = dbResponse.rows.map(row => ({
+        year: row.year,
+        traffic_volume: parseFloat(row.avg_traffic_volume.toFixed(1))
+
+    }))
+    res.json(result);
+  } catch (error) {
+    console.error("Error Displaying Data:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
